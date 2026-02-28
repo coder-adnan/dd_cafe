@@ -1,0 +1,70 @@
+{
+    "navbar": {
+        "home": "Home",
+        "menu": "Menu",
+        "admin": "Admin Demo",
+        "orderNow": "Order Now"
+    },
+    "footer": {
+        "hours": "Hours",
+        "monThu": "Mon - Thu: 7 AM - 11 PM",
+        "fri": "Fri: 2 PM - 12 AM",
+        "satSun": "Sat - Sun: 8 AM - 12 AM",
+        "followUs": "Follow Us",
+        "rights": "© {{year}} DD Cafe. All rights reserved.",
+        "location": "Al-Olya, Riyadh, Saudi Arabia"
+    },
+    "home": {
+        "heroTitle": "Where Riyadh Comes to Unwind",
+        "heroSubtitle": "Crafted for slow moments & perfect cups. Premium specialty coffee in a warm, Instagrammable atmosphere.",
+        "ctaSecondary": "View Menu",
+        "ctaPrimary": "Order Now",
+        "featuredTitle": "Signature Creations",
+        "featuredSubtitle": "Hand-crafted beverages and delightful desserts made with premium ingredients.",
+        "baristasTitle": "The People Behind Your Perfect Cup",
+        "galleryTitle": "Follow Our Daily Stories",
+        "locationTitle": "Visit Us",
+        "locationAddress": "King Fahd Branch Rd, Al Olaya, Riyadh 12214, Saudi Arabia",
+        "locationGetDirections": "Get Directions",
+        "locationOpenNow": "Open Now - Closes 11 PM"
+    },
+    "menu": {
+        "title": "Our Menu",
+        "subtitle": "Discover our carefully crafted selection of beverages and treats.",
+        "searchPlaceholder": "Search for your favorite item...",
+        "all": "All",
+        "hotCoffee": "Hot Coffee",
+        "coldCoffee": "Cold Coffee",
+        "matcha": "Matcha",
+        "desserts": "Desserts",
+        "cartEmpty": "Add items to your cart via the menu.",
+        "total": "Total",
+        "checkout": "Checkout"
+    },
+    "admin": {
+        "masterPortal": "Master Portal",
+        "mainMenu": "Main Menu",
+        "overview": "Overview",
+        "orders": "Orders",
+        "menuManager": "Menu Manager",
+        "customers": "Customers",
+        "reviews": "Reviews",
+        "preferences": "Preferences",
+        "settings": "Settings",
+        "adminUser": "Admin User",
+        "searchPlaceholder": "Search orders, items, or customers...",
+        "addNewItem": "Add New Item",
+        "dashboardTitle": "Dashboard Overview",
+        "dashboardSubtitle": "Monitor your cafe's performance and manage your menu seamlessly.",
+        "totalRevenue": "Total Revenue",
+        "totalOrders": "Total Orders",
+        "activeCustomers": "Active Customers",
+        "averageRating": "Average Rating",
+        "revenueForecast": "Revenue Forecast",
+        "revenueDescription": "Daily revenue performance for the current week.",
+        "popularTimes": "Popular Times",
+        "popularDescription": "Peak order hours today.",
+        "topItems": "Top Selling Items",
+        "topItemsDescription": "All-time highest grossing menu items."
+    }
+}
