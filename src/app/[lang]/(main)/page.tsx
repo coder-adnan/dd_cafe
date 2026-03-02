@@ -47,6 +47,102 @@ function AnimatedStars() {
   );
 }
 
+/* ── Review Carousel — Fan Layout ────────────────────────────────── */
+const reviews = [
+  { name: "Khalid M.", text: "Best Spanish Latte in Riyadh. The atmosphere is unmatched — cozy, elegant, and always welcoming.", rating: 5, date: "2 weeks ago" },
+  { name: "Sara A.", text: "DD Cafe feels like a hidden gem. Every visit is a perfect escape from the city rush.", rating: 5, date: "1 month ago" },
+  { name: "Omar K.", text: "The V60 pour-over here is exceptional. You can taste the difference quality beans make.", rating: 5, date: "3 weeks ago" },
+  { name: "Nora H.", text: "Gorgeous interior design and the matcha latte is perfection. My new favorite cafe!", rating: 5, date: "1 week ago" },
+  { name: "Fahad S.", text: "Great place for meetings or working remotely. Fast WiFi, amazing coffee, friendly staff.", rating: 4, date: "2 months ago" },
+];
+
+function ReviewCarousel() {
+  const [active, setActive] = React.useState(2); // center card
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setActive((prev) => (prev + 1) % reviews.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section className="py-24 overflow-hidden" style={{ backgroundColor: "#1a120b" }}>
+      <div className="container mx-auto px-4">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-16">
+          <motion.p variants={fadeUp} className="text-[var(--color-gold)] text-sm font-semibold uppercase tracking-[0.3em] mb-4">What Our Guests Say</motion.p>
+          <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-serif font-bold text-white/95 mb-4">Loved by Hundreds</motion.h2>
+          <motion.div variants={fadeUp}><div className="w-16 h-[2px] bg-[var(--color-gold)] mx-auto" /></motion.div>
+        </motion.div>
+
+        {/* Fan cards */}
+        <div className="relative flex items-center justify-center h-[360px] md:h-[400px]">
+          {reviews.map((review, idx) => {
+            const offset = idx - active;
+            const absOffset = Math.abs(offset);
+            const isActive = idx === active;
+
+            return (
+              <motion.div
+                key={idx}
+                animate={{
+                  x: offset * 110,
+                  scale: isActive ? 1 : 0.85 - absOffset * 0.05,
+                  rotateY: offset * -5,
+                  zIndex: reviews.length - absOffset,
+                  opacity: absOffset > 2 ? 0 : 1 - absOffset * 0.2,
+                }}
+                transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                onClick={() => setActive(idx)}
+                className="absolute w-[300px] md:w-[360px] cursor-pointer"
+              >
+                <div
+                  className={`p-8 rounded-2xl border transition-all duration-500 ${isActive
+                      ? "bg-white/10 backdrop-blur-xl border-[var(--color-gold)]/40 shadow-2xl shadow-[var(--color-gold)]/10"
+                      : "bg-white/5 backdrop-blur-md border-white/10 shadow-lg"
+                    }`}
+                >
+                  {/* Stars */}
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[var(--color-gold)] text-[var(--color-gold)]" />
+                    ))}
+                  </div>
+                  <p className="text-white/80 text-sm leading-relaxed mb-6 font-light italic">
+                    &quot;{review.text}&quot;
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-white font-semibold text-sm">{review.name}</p>
+                      <p className="text-white/40 text-xs">{review.date}</p>
+                    </div>
+                    <div className="text-[var(--color-gold)] text-xs font-medium flex items-center gap-1">
+                      <Star className="w-3 h-3 fill-[var(--color-gold)] text-[var(--color-gold)]" />
+                      Google
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Dots */}
+        <div className="flex justify-center gap-2 mt-8">
+          {reviews.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActive(idx)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === active ? "bg-[var(--color-gold)] w-6" : "bg-white/20 hover:bg-white/40"
+                }`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ══════════════════════════════════════════════════════════════════ */
 export default function Home({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = use(params);
@@ -141,63 +237,8 @@ export default function Home({ params }: { params: Promise<{ lang: string }> }) 
 
       <GoldDivider />
 
-      {/* ════════════════ 2. SOCIAL PROOF ════════════════ */}
-      <section className="py-24 bg-[var(--color-cream)] relative overflow-hidden">
-        {/* Large faded quotation mark */}
-        <div className="absolute top-8 left-1/2 -translate-x-1/2 text-[280px] font-serif text-[var(--color-gold)]/[0.07] leading-none pointer-events-none select-none">&ldquo;</div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={stagger}
-            className="text-center mb-16"
-          >
-            <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-serif font-bold text-[var(--color-espresso)] mb-4">
-              Loved by our Community
-            </motion.h2>
-            <motion.div variants={fadeUp}><GoldDivider /></motion.div>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-40px" }}
-            variants={stagger}
-            className="flex justify-center flex-wrap gap-8 mt-8"
-          >
-            {/* Testimonial cards — glassmorphism */}
-            {[
-              { quote: "The Spanish Latte is completely unmatched. My favorite spot to relax after a long day in Riyadh!", name: "Dr. Latifah", role: "Local Guide", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" },
-              { quote: "Best iced matcha in Riyadh. The staff is always super friendly and the aesthetic is just perfect.", name: "Talia Fadi", role: "Coffee Enthusiast", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" },
-            ].map((review, idx) => (
-              <motion.div
-                key={idx}
-                variants={fadeUp}
-                custom={idx}
-                whileHover={{ rotate: idx === 0 ? 1 : -1, scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="max-w-sm bg-white/60 backdrop-blur-xl rounded-2xl p-8 border border-[var(--color-gold)]/20 shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <AnimatedStars />
-                <p className="mt-5 text-[var(--color-espresso)]/80 italic leading-relaxed">
-                  &quot;{review.quote}&quot;
-                </p>
-                <div className="flex items-center gap-3 mt-6 pt-5 border-t border-[var(--color-gold)]/15">
-                  <div className="w-11 h-11 rounded-full bg-secondary overflow-hidden relative ring-2 ring-[var(--color-gold)]/30">
-                    <Image src={review.img} alt={review.name} fill className="object-cover" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-[var(--color-espresso)] text-sm">{review.name}</p>
-                    <p className="text-xs text-muted-foreground">{review.role}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      {/* ════════════════ 2. SOCIAL PROOF — CAROUSEL FAN ════════════════ */}
+      <ReviewCarousel />
 
       <GoldDivider />
 
@@ -278,8 +319,8 @@ export default function Home({ params }: { params: Promise<{ lang: string }> }) 
             {[
               { name: "Rio", quote: "Every cup should feel personal.", img: "https://images.unsplash.com/photo-1544717302-de2939b7ef71?auto=format&fit=crop&q=80" },
               { name: "Junel", quote: "Coffee is a conversation starter.", img: "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?auto=format&fit=crop&q=80" },
-              { name: "Sed", quote: "Precision in every pour.", img: "https://images.unsplash.com/photo-1583336214346-ce94680877bd?auto=format&fit=crop&q=80" },
-              { name: "Neoaz", quote: "The aroma tells the story.", img: "https://images.unsplash.com/photo-1627581180016-af244c017dfc?auto=format&fit=crop&q=80" }
+              { name: "Sed", quote: "Precision in every pour.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80" },
+              { name: "Neoaz", quote: "The aroma tells the story.", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80" }
             ].map((barista, idx) => (
               <motion.div key={idx} variants={fadeUp} custom={idx} className="text-center group">
                 {/* Square portrait — not circular */}
@@ -333,10 +374,12 @@ export default function Home({ params }: { params: Promise<{ lang: string }> }) 
       <section className="py-2 bg-background">
         <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[200px] md:auto-rows-[250px] gap-1">
           {[
-            { img: "https://images.unsplash.com/photo-1445116572660-236099cec9f0?auto=format&fit=crop&q=80", span: "row-span-2" },
+            { img: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80", span: "row-span-2" },
             { img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80", span: "" },
             { img: "https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&q=80", span: "" },
             { img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80", span: "row-span-2" },
+            { img: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&q=80", span: "" },
+            { img: "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?auto=format&fit=crop&q=80", span: "" },
           ].map((item, idx) => (
             <div key={idx} className={`relative group overflow-hidden bg-muted ${item.span}`}>
               <Image src={item.img} alt="Gallery" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -422,6 +465,6 @@ export default function Home({ params }: { params: Promise<{ lang: string }> }) 
           </motion.div>
         </div>
       </section>
-    </div>
+    </div >
   );
 }

@@ -1,13 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Coffee, Menu, ShoppingBag } from "lucide-react";
+import { Coffee, Menu, X, ShoppingBag } from "lucide-react";
 import { LanguageSwitcher } from "@/components/language-switcher";
 
 export function Navbar({ lang }: { lang: string }) {
     const pathname = usePathname();
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
@@ -47,10 +49,57 @@ export function Navbar({ lang }: { lang: string }) {
                     </Button>
 
                     {/* Mobile Menu Toggle */}
-                    <Button variant="ghost" size="icon" className="md:hidden" aria-label="Menu">
-                        <Menu className="h-5 w-5" />
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        className="md:hidden"
+                        aria-label="Menu"
+                        onClick={() => setMobileMenuOpen((prev) => !prev)}
+                    >
+                        {mobileMenuOpen ? (
+                            <X className="h-5 w-5" />
+                        ) : (
+                            <Menu className="h-5 w-5" />
+                        )}
                     </Button>
                 </div>
+            </div>
+
+            {/* Mobile Menu Panel */}
+            <div
+                className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? "max-h-72 border-t" : "max-h-0"
+                    }`}
+            >
+                <nav className="container mx-auto px-4 py-4 flex flex-col gap-3 bg-background/95 backdrop-blur-md">
+                    <Link
+                        href={`/${lang}`}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary/80 hover:text-primary hover:bg-accent transition-colors font-medium"
+                    >
+                        {lang === "ar" ? "الرئيسية" : "Home"}
+                    </Link>
+                    <Link
+                        href={`/${lang}/menu`}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary/80 hover:text-primary hover:bg-accent transition-colors font-medium"
+                    >
+                        {lang === "ar" ? "قائمة الطعام" : "Menu"}
+                    </Link>
+                    <Link
+                        href={`/${lang}/admin`}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-muted-foreground hover:text-primary hover:bg-accent transition-colors text-sm"
+                    >
+                        {lang === "ar" ? "لوحة الإدارة" : "Admin Demo"}
+                    </Link>
+                    <Link
+                        href={`/${lang}/menu`}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="mt-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors sm:hidden"
+                    >
+                        {lang === "ar" ? "اطلب الآن" : "Order Now"}
+                    </Link>
+                </nav>
             </div>
         </header>
     );

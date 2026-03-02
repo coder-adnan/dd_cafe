@@ -52,7 +52,7 @@ const MENU_ITEMS = [
         description: "Steeped for 24 hours for a smooth, bold flavor.",
         price: 26,
         category: "Cold Coffee",
-        image: "https://images.unsplash.com/photo-1461023058943-07cb1ce89b65?auto=format&fit=crop&q=80"
+        image: "https://images.unsplash.com/photo-1504630083234-14187a9df0f5?auto=format&fit=crop&q=80"
     },
     {
         id: 6,
@@ -60,7 +60,7 @@ const MENU_ITEMS = [
         description: "Warm matcha with perfectly steamed milk.",
         price: 28,
         category: "Matcha",
-        image: "https://images.unsplash.com/photo-1510410492198-f218a5620db4?auto=format&fit=crop&q=80"
+        image: "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&q=80"
     },
     {
         id: 7,
@@ -84,7 +84,7 @@ const MENU_ITEMS = [
         description: "Vanilla bean gelato drowned in a shot of signature espresso.",
         price: 35,
         category: "Special Items",
-        image: "https://images.unsplash.com/photo-1588656755452-f4dafd11bc32?auto=format&fit=crop&q=80"
+        image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&q=80"
     }
 ];
 
