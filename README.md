@@ -79,7 +79,7 @@ dd_cafe/
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/coder-adnan/dd_cafe
    cd dd_cafe
    ```
 
