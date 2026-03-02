@@ -1,36 +1,151 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ☕ DD Cafe
+
+A premium, bilingual (English / Arabic) cafe website for **DD Cafe — Riyadh's Cozy Coffee Destination**. Built with Next.js 16, featuring a cinematic homepage, interactive menu with cart, and an admin analytics dashboard.
+
+---
+
+## Features
+
+- **Bilingual (i18n)** — Full English & Arabic support with automatic RTL layout switching.
+- **Cinematic Homepage** — Hero section, signature drinks showcase, barista profiles, Instagram gallery, and testimonials carousel.
+- **Interactive Menu** — Filterable menu grid with add-to-cart functionality.
+- **Admin Dashboard** — Sales analytics, order management, and menu inventory powered by Recharts.
+- **Responsive Design** — Mobile-first layout with animated hamburger menu navigation.
+- **Premium Aesthetics** — Glassmorphism, smooth animations via Framer Motion, and curated typography (Inter + Playfair Display).
+
+---
+
+## Tech Stack
+
+| Layer       | Technology                                                        |
+| ----------- | ----------------------------------------------------------------- |
+| Framework   | [Next.js 16](https://nextjs.org) (App Router, SSG)               |
+| Language    | TypeScript 5                                                      |
+| Styling     | [Tailwind CSS 4](https://tailwindcss.com)                         |
+| UI Library  | [shadcn/ui](https://ui.shadcn.com) (Radix UI + CVA)              |
+| Animations  | [Framer Motion](https://www.framer.com/motion/)                   |
+| Charts      | [Recharts](https://recharts.org)                                  |
+| Icons       | [Lucide React](https://lucide.dev)                                |
+| Fonts       | Inter, Playfair Display (via `next/font`)                         |
+
+---
+
+## Project Structure
+
+```
+dd_cafe/
+├── public/                     # Static assets (images, favicon)
+├── src/
+│   ├── app/
+│   │   ├── globals.css         # Global styles & design tokens
+│   │   ├── layout.tsx          # Root layout (fonts, metadata)
+│   │   └── [lang]/             # Locale-based routing (en / ar)
+│   │       ├── layout.tsx      # Lang layout (navbar, footer, direction)
+│   │       ├── (main)/
+│   │       │   ├── page.tsx    # Homepage
+│   │       │   └── menu/
+│   │       │       └── page.tsx # Menu page
+│   │       └── admin/
+│   │           └── page.tsx    # Admin dashboard
+│   ├── components/
+│   │   ├── navbar.tsx          # Responsive navbar with mobile menu
+│   │   ├── footer.tsx          # Site footer
+│   │   ├── language-switcher.tsx
+│   │   ├── direction-setter.tsx # RTL/LTR direction handler
+│   │   └── ui/                 # shadcn/ui primitives (Button, Card, Tabs, etc.)
+│   ├── dictionaries/
+│   │   ├── en.json             # English translations
+│   │   └── ar.json             # Arabic translations
+│   ├── i18n.ts                 # Locale config & dictionary loader
+│   ├── middleware.ts           # Locale redirect middleware
+│   └── lib/
+│       └── utils.ts            # Utility helpers (cn, etc.)
+├── next.config.ts
+├── package.json
+└── tsconfig.json
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- **Node.js** ≥ 18
+- **npm** (comes with Node.js)
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd dd_cafe
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Open in your browser**
+
+   Navigate to [http://localhost:3000](http://localhost:3000). You will be automatically redirected to `/en` (English).
+
+   To view the Arabic version, visit [http://localhost:3000/ar](http://localhost:3000/ar).
+
+---
+
+## Available Scripts
+
+| Command           | Description                                |
+| ----------------- | ------------------------------------------ |
+| `npm run dev`     | Start the development server               |
+| `npm run build`   | Create an optimized production build        |
+| `npm run start`   | Serve the production build locally          |
+| `npm run lint`    | Run ESLint across the project              |
+
+---
+
+## Internationalization
+
+The app supports **English** (`en`) and **Arabic** (`ar`) via file-based routing under `src/app/[lang]/`.
+
+- Translation files live in `src/dictionaries/`.
+- Middleware in `src/middleware.ts` auto-redirects bare URLs to the default locale (`en`).
+- The `LanguageSwitcher` component allows users to toggle between languages.
+- Arabic pages automatically switch to **RTL** layout direction.
+
+---
+
+## Deployment
+
+### Vercel (Recommended)
+
+The easiest way to deploy is via the [Vercel Platform](https://vercel.com/new):
+
+1. Push the repo to GitHub / GitLab / Bitbucket.
+2. Import the project on Vercel.
+3. Vercel auto-detects Next.js — no extra config needed.
+
+### Self-Hosted
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The production server will start on port `3000` by default.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is private and proprietary.
